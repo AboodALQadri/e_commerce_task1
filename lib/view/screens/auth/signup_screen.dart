@@ -5,6 +5,7 @@ import 'package:e_commerce_task1/view/widgets/auth/check_box_widget.dart';
 import 'package:e_commerce_task1/view/widgets/auth/container_under_widget.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -39,9 +40,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
           elevation: 0,
         ),
         body: SingleChildScrollView(
@@ -56,20 +57,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Column(
                     children: [
                       Row(
-                        children: const [
+                        children: [
                           TextUtils(
                             text: 'SIGN',
-                            color: mainColor,
+                            color: Get.isDarkMode ? mainColor : pinkClr,
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
                             underLine: TextDecoration.none,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 3,
                           ),
                           TextUtils(
                             text: 'UP',
-                            color: Colors.black,
+                            color: Get.isDarkMode ? Colors.black : Colors.white,
                             fontWeight: FontWeight.w500,
                             fontSize: 28,
                             underLine: TextDecoration.none,
@@ -83,7 +84,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _userNameTextController,
                         obscureText: false,
                         validator: () {},
-                        prefixIcon: Image.asset('assets/images/user.png'),
+                        prefixIcon: Get.isDarkMode
+                            ? Image.asset('assets/images/user.png')
+                            : const Icon(
+                                Icons.person,
+                                color: pinkClr,
+                                size: 30,
+                              ),
                         suffixIcon: const Text(''),
                         hintText: 'User Name',
                       ),
@@ -94,7 +101,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _emailTextController,
                         obscureText: false,
                         validator: () {},
-                        prefixIcon: Image.asset('assets/images/email.png'),
+                        prefixIcon: Get.isDarkMode
+                            ? Image.asset('assets/images/email.png')
+                            : const Icon(
+                                Icons.email,
+                                color: pinkClr,
+                                size: 30,
+                              ),
                         suffixIcon: const Text(''),
                         hintText: 'Email',
                       ),
@@ -105,20 +118,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _passwordTextController,
                         obscureText: true,
                         validator: () {},
-                        prefixIcon: Image.asset('assets/images/lock.png'),
+                        prefixIcon: Get.isDarkMode
+                            ? Image.asset('assets/images/lock.png')
+                            : const Icon(
+                                Icons.lock,
+                                color: pinkClr,
+                                size: 30,
+                              ),
                         suffixIcon: const Text(''),
                         hintText: 'Password',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      CheckBoxWidget(),
-                      SizedBox(
+                      const CheckBoxWidget(),
+                      const SizedBox(
                         height: 50,
                       ),
                       AuthButtonWidget(text: 'SIGN UP', onPressed: () {}),
-                      SizedBox(height: 50,),
-
+                      const SizedBox(
+                        height: 50,
+                      ),
                     ],
                   ),
                 ),

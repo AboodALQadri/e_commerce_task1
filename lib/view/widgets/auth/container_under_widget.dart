@@ -1,6 +1,7 @@
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ContainerUnderWidget extends StatelessWidget {
   const ContainerUnderWidget({
@@ -19,9 +20,9 @@ class ContainerUnderWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 110,
-      decoration: const BoxDecoration(
-        color: mainColor,
-        borderRadius: BorderRadius.only(
+      decoration:  BoxDecoration(
+        color:  Get.isDarkMode ?  mainColor : pinkClr,
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
           topLeft: Radius.circular(20),
         ),

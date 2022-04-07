@@ -1,6 +1,7 @@
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AuthButtonWidget extends StatelessWidget {
   const AuthButtonWidget({
@@ -18,13 +19,13 @@ class AuthButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       child: TextUtils(
         text: text,
-        color: Colors.white,
+        color:  Colors.white,
         fontWeight: FontWeight.bold,
         fontSize: 18,
         underLine: TextDecoration.none,
       ),
       style: ElevatedButton.styleFrom(
-        primary: mainColor,
+        primary: Get.isDarkMode ?  mainColor : pinkClr,
         minimumSize: const Size(360, 50),
       ),
     );
