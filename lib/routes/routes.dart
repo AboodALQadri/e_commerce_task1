@@ -1,5 +1,7 @@
 import 'package:e_commerce_task1/logic/bindings/auth_binding.dart';
+import 'package:e_commerce_task1/view/screens/auth/forgot_password.dart';
 import 'package:e_commerce_task1/view/screens/auth/signup_screen.dart';
+import 'package:e_commerce_task1/view/screens/main_screen.dart';
 import 'package:e_commerce_task1/view/welcome_screen.dart';
 import 'package:get/get.dart';
 
@@ -12,16 +14,27 @@ class AppRoutes {
 
   static final routes = [
     GetPage(
-      name: '/welcome_screen',
+      name: Routes.welcomeScreen,
       page: () => const WelcomeScreen(),
     ),
     GetPage(
-      name: '/login_screen',
+      name: Routes.loginScreen,
       page: () => const LoginScreen(),
+      binding: AuthBinding(),
     ),
     GetPage(
-      name: '/signUp_screen',
+      name: Routes.signUpScreen,
       page: () => const SignUpScreen(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: Routes.forgotPasswordScreen,
+      page: () => ForgotPasswordScreen(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: Routes.mainScreen,
+      page: () => const MainScreen(),
       binding: AuthBinding(),
     ),
   ];
@@ -31,4 +44,6 @@ class Routes {
   static const welcomeScreen = '/welcome_screen';
   static const loginScreen = '/login_screen';
   static const signUpScreen = '/signUp_screen';
+  static const forgotPasswordScreen = '/forgot_password_screen';
+  static const mainScreen = '/main_screen';
 }

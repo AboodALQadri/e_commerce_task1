@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="app_name">uzay shop getx</string>
+    <string name="facebook_app_id">692395395403980</string>
+    <string name="fb_login_protocol_scheme">fb692395395403980</string>
+
+
+</resources>

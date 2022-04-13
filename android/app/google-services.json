@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1072954799901",
+    "project_id": "uzay-shop-getx",
+    "storage_bucket": "uzay-shop-getx.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072954799901:android:4b2eeb4bb32fd7e1af53f4",
+        "android_client_info": {
+          "package_name": "com.example.e_commerce_task1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072954799901-k2j5c0bj02q9kiahk7keotph1v3piu1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWYBttoNNgVVSsCnQzmr_MYaIRu554LhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072954799901-k2j5c0bj02q9kiahk7keotph1v3piu1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
