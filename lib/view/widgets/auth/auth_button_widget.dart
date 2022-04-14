@@ -25,7 +25,7 @@ class AuthButtonWidget extends StatelessWidget {
         underLine: TextDecoration.none,
       ),
       style: ElevatedButton.styleFrom(
-        primary: Get.isDarkMode ?  mainColor : pinkClr,
+        primary: Get.isDarkMode ?   pinkClr : mainColor ,
         minimumSize: const Size(360, 50),
       ),
     );

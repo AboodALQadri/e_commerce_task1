@@ -48,9 +48,9 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+          backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
           elevation: 0,
         ),
         body: ListView(
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
                             children: [
                               TextUtils(
                                 text: 'SIGN',
-                                color: Get.isDarkMode ? mainColor : pinkClr,
+                                color: Get.isDarkMode ? pinkClr : mainColor,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 28,
                                 underLine: TextDecoration.none,
@@ -82,8 +82,8 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
                               TextUtils(
                                 text: 'UP',
                                 color: Get.isDarkMode
-                                    ? Colors.black
-                                    : Colors.white,
+                                    ? Colors.white
+                                    : Colors.black,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 28,
                                 underLine: TextDecoration.none,
@@ -105,12 +105,12 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
                               }
                             },
                             prefixIcon: Get.isDarkMode
-                                ? Image.asset('assets/images/user.png')
-                                : const Icon(
+                                ? const Icon(
                                     Icons.person,
                                     color: pinkClr,
                                     size: 30,
-                                  ),
+                                  )
+                                : Image.asset('assets/images/user.png'),
                             suffixIcon: const Text(''),
                             hintText: 'User Name',
                           ),
@@ -128,12 +128,12 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
                               }
                             },
                             prefixIcon: Get.isDarkMode
-                                ? Image.asset('assets/images/email.png')
-                                : const Icon(
+                                ? const Icon(
                                     Icons.email,
                                     color: pinkClr,
                                     size: 30,
-                                  ),
+                                  )
+                                : Image.asset('assets/images/email.png'),
                             suffixIcon: const Text(''),
                             hintText: 'Email',
                           ),
@@ -154,12 +154,12 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
                                   }
                                 },
                                 prefixIcon: Get.isDarkMode
-                                    ? Image.asset('assets/images/lock.png')
-                                    : const Icon(
+                                    ? const Icon(
                                         Icons.lock,
                                         color: pinkClr,
                                         size: 30,
-                                      ),
+                                      )
+                                    : Image.asset('assets/images/lock.png'),
                                 suffixIcon: IconButton(
                                   onPressed: () {
                                     controller.visibility();
@@ -212,7 +212,6 @@ class _SignUpScreenState extends State<SignUpScreen> with ValidateHelper {
                                       password: password,
                                     );
                                     controller.isCheckBox == true;
-
                                   }
                                 },
                               );

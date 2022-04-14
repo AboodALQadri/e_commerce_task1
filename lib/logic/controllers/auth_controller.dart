@@ -119,46 +119,6 @@ class AuthController extends GetxController {
     }
   }
 
-  void googleSignUpApp() async {
-    try {
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      displayUserName = googleUser!.displayName!;
-      displayUserPhoto = googleUser.photoUrl!;
-
-      update();
-
-      Get.offNamed(Routes.mainScreen);
-      //
-    } catch (error) {
-      Get.snackbar(
-        'ERROR!',
-        error.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-    }
-  }
-
-  void facebookSignUpApp() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
-
-    if (loginResult.status == LoginStatus.success) {
-      final data = await FacebookAuth.instance.getUserData();
-
-      facebookModel = FacebookModel.fromJson(data);
-
-      print('////////////////////////////////////////////////////////');
-      print('${facebookModel!.email}');
-      print('${facebookModel!.email}');
-      print('///////////////////////////////////////////////////////////');
-
-      update();
-
-      Get.offNamed(Routes.mainScreen);
-    }
-  }
-
   void resetPassword({required String email}) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
@@ -201,6 +161,45 @@ class AuthController extends GetxController {
         backgroundColor: Colors.green,
         colorText: Colors.white,
       );
+    }
+  }
+
+  void googleSignUpApp() async {
+    try {
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      displayUserName = googleUser!.displayName!;
+      displayUserPhoto = googleUser.photoUrl!;
+
+      update();
+
+      Get.offNamed(Routes.mainScreen);
+    } catch (error) {
+      Get.snackbar(
+        'ERROR!',
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    }
+  }
+
+  void facebookSignUpApp() async {
+    final LoginResult loginResult = await FacebookAuth.instance.login();
+
+    if (loginResult.status == LoginStatus.success) {
+      final data = await FacebookAuth.instance.getUserData();
+
+      facebookModel = FacebookModel.fromJson(data);
+
+      print('////////////////////////////////////////////////////////');
+      print('${facebookModel!.email}');
+      print('${facebookModel!.email}');
+      print('///////////////////////////////////////////////////////////');
+
+      update();
+
+      Get.offNamed(Routes.mainScreen);
     }
   }
 

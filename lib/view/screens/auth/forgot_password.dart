@@ -19,23 +19,23 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+        backgroundColor: context.theme.backgroundColor,
         appBar: AppBar(
           elevation: 0,
           title: Text(
             'Forgot Password',
             style: TextStyle(
-              color: Get.isDarkMode ? mainColor : pinkClr,
+              color: Get.isDarkMode ? pinkClr : mainColor,
             ),
           ),
           centerTitle: true,
-          backgroundColor: Get.isDarkMode ? Colors.white : darkGreyClr,
+          backgroundColor: Get.isDarkMode ? darkGreyClr : Colors.white,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
             icon: const Icon(Icons.arrow_back),
-            color: Get.isDarkMode ? Colors.black : Colors.white,
+            color: Get.isDarkMode ? Colors.white : Colors.black,
           ),
         ),
         body: Form(
@@ -54,7 +54,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     'if you want to recover your Account , then please provide your Email ID to below..',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Get.isDarkMode ? Colors.black : Colors.white,
+                      color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                   const SizedBox(
@@ -78,12 +78,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                       }
                     },
                     prefixIcon: Get.isDarkMode
-                        ? Image.asset('assets/images/email.png')
-                        : const Icon(
+                        ? const Icon(
                             Icons.email,
                             color: pinkClr,
                             size: 30,
-                          ),
+                          )
+                        : Image.asset('assets/images/email.png'),
                     suffixIcon: const Text(''),
                     hintText: 'Email',
                   ),
@@ -95,8 +95,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       return AuthButtonWidget(
                         text: 'SEND',
                         onPressed: () {
-                          if(formKey.currentState!.validate()){
-
+                          if (formKey.currentState!.validate()) {
                             String email = _emailTextController.text.trim();
 
                             controller.resetPassword(email: email);
