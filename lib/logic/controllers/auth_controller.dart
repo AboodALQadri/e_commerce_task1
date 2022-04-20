@@ -4,18 +4,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   bool isVisibility = false;
-
   bool isCheckBox = false;
 
   var displayUserName = '';
+  var displayUserPhoto = '';
+
   FirebaseAuth auth = FirebaseAuth.instance;
   var googleSignIn = GoogleSignIn();
-  var displayUserPhoto = '';
-  FacebookModel? facebookModel;
+  late FacebookModel facebookModel;
+
+  var isSignedIn = false;
+  final GetStorage authBox = GetStorage();
 
   void visibility() {
     isVisibility = !isVisibility;
@@ -81,9 +85,10 @@ class AuthController extends GetxController {
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        displayUserName = auth.currentUser!.displayName!;
-      });
+          .then((value) => displayUserName = auth.currentUser!.displayName!);
+
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
 
       update();
 
@@ -170,6 +175,10 @@ class AuthController extends GetxController {
       displayUserName = googleUser!.displayName!;
       displayUserPhoto = googleUser.photoUrl!;
 
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
+
+
       update();
 
       Get.offNamed(Routes.mainScreen);
@@ -192,10 +201,9 @@ class AuthController extends GetxController {
 
       facebookModel = FacebookModel.fromJson(data);
 
-      print('////////////////////////////////////////////////////////');
-      print('${facebookModel!.email}');
-      print('${facebookModel!.email}');
-      print('///////////////////////////////////////////////////////////');
+      isSignedIn = true;
+      authBox.write('auth', isSignedIn);
+
 
       update();
 
@@ -203,5 +211,29 @@ class AuthController extends GetxController {
     }
   }
 
-  void signOutFromApp() {}
+  void signOutFromApp() async {
+    try {
+      await auth.signOut();
+      await googleSignIn.signOut();
+      await FacebookAuth.i.logOut();
+      displayUserName = '';
+      displayUserPhoto = '';
+
+      isSignedIn = false;
+      authBox.remove('auth');
+
+
+      update();
+
+      Get.offNamed(Routes.welcomeScreen);
+    } catch (error) {
+      Get.snackbar(
+        'ERROR!',
+        error.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    }
+  }
 }

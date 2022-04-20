@@ -1,7 +1,7 @@
 import 'package:e_commerce_task1/logic/controllers/auth_controller.dart';
 import 'package:get/get.dart';
 
-class AuthBinding extends Bindings {
+class AuthBinding implements Bindings {
   @override
   void dependencies() {
     Get.put(AuthController());

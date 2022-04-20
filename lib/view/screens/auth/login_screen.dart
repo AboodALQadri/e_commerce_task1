@@ -108,7 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   )
                                 : Image.asset('assets/images/email.png'),
                             suffixIcon: const Text(''),
+
                             hintText: 'Email',
+
                           ),
                           const SizedBox(
                             height: 20,
