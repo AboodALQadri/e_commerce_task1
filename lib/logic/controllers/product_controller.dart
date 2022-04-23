@@ -1,6 +1,7 @@
-import 'package:e_commerce_task1/model/product_models.dart';
+import 'package:e_commerce_task1/models/product_models.dart';
 import 'package:e_commerce_task1/services/product_services.dart';
-import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ProductController extends GetxController {
@@ -10,23 +11,22 @@ class ProductController extends GetxController {
 
   var storage = GetStorage();
 
+  // final GetStorage storage = GetStorage();
+
   var isLoading = true.obs;
 
-  var isFavourite = false.obs;
+  // var isFavourite = false.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
 
-    // storage.read<List>('isFavouriteList');
+    List? storedShoppings = storage.read<List>('isFavouritesList');
 
-    List? storedShopping = storage.read<List>('isFavouriteList');
-
-    if (storedShopping != null) {
+    if (storedShoppings != null) {
       favouritesList =
-          storedShopping.map((e) => ProductModels.fromJson(e)).toList().obs;
+          storedShoppings.map((e) => ProductModels.fromJson(e)).toList().obs;
     }
-
     getProducts();
   }
 
@@ -42,7 +42,6 @@ class ProductController extends GetxController {
     }
   }
 
-  //
   // void addFavourites() {
   //   isFavourites.value = !isFavourites.value;
   // }
@@ -53,12 +52,12 @@ class ProductController extends GetxController {
 
     if (existingIndex >= 0) {
       favouritesList.removeAt(existingIndex);
-      await storage.remove('isFavouriteList');
+
+      await storage.remove('isFavouritesList');
     } else {
       favouritesList
           .add(productList.firstWhere((element) => element.id == productId));
-
-      await storage.write('isFavouriteList', favouritesList);
+      await storage.write('isFavouritesList', favouritesList);
     }
   }
 

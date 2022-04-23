@@ -19,7 +19,7 @@ class MainScreen extends StatelessWidget {
               backgroundColor: Get.isDarkMode ? darkGreyClr : mainColor,
               title: Text(
                 _controller.title[_controller.currentIndex.value],
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
               elevation: 0,
               centerTitle: true,

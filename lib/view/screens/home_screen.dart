@@ -4,6 +4,7 @@ import 'package:e_commerce_task1/view/widgets/home/search_form_text.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_utils/src/extensions/context_extensions.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

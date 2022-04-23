@@ -1,9 +1,9 @@
+import 'package:e_commerce_task1/logic/controllers/product_controller.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../logic/controllers/product_controller.dart';
 
 class CardItems extends StatelessWidget {
   CardItems({Key? key}) : super(key: key);

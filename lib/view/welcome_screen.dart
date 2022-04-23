@@ -1,10 +1,8 @@
 import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
-import 'package:e_commerce_task1/view/screens/auth/login_screen.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);

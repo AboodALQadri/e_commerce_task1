@@ -43,7 +43,7 @@ class ProductModels {
         title: json["title"],
         price: json["price"].toDouble(),
         description: json["description"],
-        category: categoryValues.map[json["category"]],
+        category: categoryValues.map![json["category"]],
         image: json["image"],
         rating: Rating.fromJson(json["rating"]),
       );
@@ -53,7 +53,7 @@ class ProductModels {
         "title": title,
         "price": price,
         "description": description,
-        "category": categoryValues.reverse[category],
+        "category": categoryValues.reverse![category],
         "image": image,
         "rating": rating.toJson(),
       };
@@ -89,14 +89,14 @@ class Rating {
 }
 
 class EnumValues<T> {
-  late Map<String, T> map;
-  late Map<T, String> reverseMap;
+  Map<String, T>? map;
+  Map<T, String>? reverseMap;
 
   EnumValues(this.map);
 
-  Map<T, String> get reverse {
+  Map<T, String>? get reverse {
     if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
+      reverseMap = map!.map((k, v) => new MapEntry(v, k));
     }
     return reverseMap;
   }

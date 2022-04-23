@@ -2,12 +2,12 @@ import 'package:e_commerce_task1/logic/bindings/auth_binding.dart';
 import 'package:e_commerce_task1/logic/bindings/main_binding.dart';
 import 'package:e_commerce_task1/logic/bindings/product_binding.dart';
 import 'package:e_commerce_task1/view/screens/auth/forgot_password.dart';
+import 'package:e_commerce_task1/view/screens/auth/login_screen.dart';
 import 'package:e_commerce_task1/view/screens/auth/signup_screen.dart';
 import 'package:e_commerce_task1/view/screens/main_screen.dart';
 import 'package:e_commerce_task1/view/welcome_screen.dart';
 import 'package:get/get.dart';
 
-import '../view/screens/auth/login_screen.dart';
 
 class AppRoutes {
   //InitialRoutes
@@ -39,9 +39,11 @@ class AppRoutes {
       name: Routes.mainScreen,
       page: () => MainScreen(),
       bindings: [
-        AuthBinding(),
         ProductBinding(),
+
+        AuthBinding(),
         MainBinding(),
+
       ],
     ),
   ];

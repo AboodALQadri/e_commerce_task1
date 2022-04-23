@@ -8,6 +8,8 @@ class FavouriteScreen extends StatelessWidget {
 
   final _controller = Get.find<ProductController>();
 
+  // final _controller = Get.put(ProductController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,4 +1,4 @@
-import 'package:e_commerce_task1/model/facebook_model.dart';
+import 'package:e_commerce_task1/models/facebook_model.dart';
 import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -184,7 +184,7 @@ class AuthController extends GetxController {
       Get.offNamed(Routes.mainScreen);
     } catch (error) {
       Get.snackbar(
-        'ERROR!',
+        'Error!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
