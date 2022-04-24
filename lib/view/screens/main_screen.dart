@@ -1,4 +1,5 @@
 import 'package:e_commerce_task1/logic/controllers/main_controller.dart';
+import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,9 @@ class MainScreen extends StatelessWidget {
               centerTitle: true,
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(Routes.cartScreen);
+                  },
                   icon: Image.asset('assets/images/shop.png'),
                 ),
               ],
