@@ -9,7 +9,6 @@ import 'package:e_commerce_task1/view/screens/main_screen.dart';
 import 'package:e_commerce_task1/view/welcome_screen.dart';
 import 'package:get/get.dart';
 
-
 class AppRoutes {
   //InitialRoutes
 
@@ -48,7 +47,10 @@ class AppRoutes {
     GetPage(
       name: Routes.cartScreen,
       page: () => CartScreen(),
-      binding: AuthBinding(),
+      bindings: [
+        AuthBinding(),
+        ProductBinding(),
+      ],
     ),
   ];
 }

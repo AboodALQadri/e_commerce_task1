@@ -17,7 +17,7 @@ class EmptyCart extends StatelessWidget {
             size: 150,
             color: Get.isDarkMode ? Colors.white : Colors.black,
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
           RichText(
@@ -42,7 +42,7 @@ class EmptyCart extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -53,7 +53,7 @@ class EmptyCart extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           SizedBox(
@@ -69,7 +69,7 @@ class EmptyCart extends StatelessWidget {
               onPressed: () {
                 Get.toNamed(Routes.mainScreen);
               },
-              child: Text(
+              child: const Text(
                 'Go to Home',
                 style: TextStyle(
                   fontSize: 20,

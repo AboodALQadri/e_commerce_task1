@@ -1,12 +1,15 @@
+import 'package:e_commerce_task1/logic/controllers/cart_controller.dart';
 import 'package:e_commerce_task1/logic/controllers/product_controller.dart';
+import 'package:e_commerce_task1/models/product_models.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class CardItems extends StatelessWidget {
   CardItems({Key? key}) : super(key: key);
+
+  final _cartController = Get.find<CartController>();
 
   final _controller = Get.find<ProductController>();
 
@@ -36,6 +39,7 @@ class CardItems extends StatelessWidget {
                   price: _controller.productList[index].price,
                   rate: _controller.productList[index].rating.rate,
                   productId: _controller.productList[index].id,
+                  productModels: _controller.productList[index],
                 );
               },
             ),
@@ -50,6 +54,7 @@ class CardItems extends StatelessWidget {
     required double price,
     required double rate,
     required int productId,
+    required ProductModels productModels,
   }) {
     return Padding(
       padding: const EdgeInsets.all(5),
@@ -87,9 +92,11 @@ class CardItems extends StatelessWidget {
                             ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _cartController.addProductToCart(productModels);
+                      },
                       icon: const Icon(
-                        Icons.add,
+                        Icons.shopping_cart,
                         // color: Get.isDarkMode ? Colors.white : Colors.black,
                         color: Colors.black,
                       ),

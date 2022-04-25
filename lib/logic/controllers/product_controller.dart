@@ -1,7 +1,6 @@
 import 'package:e_commerce_task1/models/product_models.dart';
 import 'package:e_commerce_task1/services/product_services.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ProductController extends GetxController {
