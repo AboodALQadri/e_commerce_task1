@@ -1,4 +1,7 @@
+import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_commerce_task1/logic/controllers/cart_controller.dart';
+import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/productDetails/color_picker.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,8 @@ class ImageSlider extends StatefulWidget {
 }
 
 class _ImageSliderState extends State<ImageSlider> {
+  final _cartController = Get.find<CartController>();
+
   int currentPage = 0;
   int currentColor = 0;
 
@@ -110,6 +115,72 @@ class _ImageSliderState extends State<ImageSlider> {
               separatorBuilder: (context, index) => const SizedBox(height: 3),
               itemCount: colorSelected.length,
             ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsetsDirectional.only(
+            top: 20,
+            start: 25,
+            end: 25,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Container(
+                  padding: const EdgeInsetsDirectional.all(8),
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode
+                        ? pinkClr.withOpacity(0.8)
+                        : mainColor.withOpacity(0.8),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(start: 10),
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Get.isDarkMode ? Colors.black : Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              ),
+              Obx(
+                () {
+                  return Badge(
+                    position: BadgePosition.topEnd(top: -10, end: -10),
+                    animationDuration: const Duration(milliseconds: 300),
+                    animationType: BadgeAnimationType.slide,
+                    badgeContent: Text(
+                      _cartController.quantity().toString(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Get.toNamed(Routes.cartScreen);
+                      },
+                      child: Container(
+                        padding: const EdgeInsetsDirectional.all(8),
+                        decoration: BoxDecoration(
+                          color: Get.isDarkMode
+                              ? pinkClr.withOpacity(0.8)
+                              : mainColor.withOpacity(0.8),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.shopping_cart,
+                          color: Get.isDarkMode ? Colors.black : Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ],
