@@ -7,8 +7,8 @@ import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CardItems extends StatelessWidget {
-  CardItems({Key? key}) : super(key: key);
+class CategoryItems extends StatelessWidget {
+  CategoryItems({Key? key}) : super(key: key);
 
   final _cartController = Get.find<CartController>();
 
@@ -16,63 +16,38 @@ class CardItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () {
-        if (_controller.isLoading.value) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Get.isDarkMode ? pinkClr : mainColor,
-            ),
+    return Scaffold(
+      backgroundColor: context.theme.backgroundColor,
+      appBar: AppBar(
+        title: const Text('Category Items'),
+        centerTitle: true,
+        backgroundColor: Get.isDarkMode ? darkGreyClr : mainColor,
+      ),
+      body: GridView.builder(
+        itemCount: _controller.productList.length,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          childAspectRatio: 0.8,
+          mainAxisSpacing: 9.0,
+          crossAxisSpacing: 6.0,
+          maxCrossAxisExtent: 200,
+        ),
+        itemBuilder: (context, index) {
+          return buildCardItems(
+            image: _controller.productList[index].image,
+            price: _controller.productList[index].price,
+            rate: _controller.productList[index].rating.rate,
+            productId: _controller.productList[index].id,
+            productModels: _controller.productList[index],
+            onTap: () {
+              Get.to(
+                ProductDetailsScreen(
+                  productModels: _controller.productList[index],
+                ),
+              );
+            },
           );
-        } else {
-          return Expanded(
-            child: _controller.searchList.isEmpty &&
-                    _controller.searchTextController.text.isNotEmpty
-                ? Get.isDarkMode
-                    ? Image.asset('assets/images/search_empty_dark.png')
-                    : Image.asset('assets/images/search_empry_light.png')
-                : GridView.builder(
-                    itemCount: _controller.searchList.isEmpty
-                        ? _controller.productList.length
-                        : _controller.searchList.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                      childAspectRatio: 0.8,
-                      mainAxisSpacing: 9.0,
-                      crossAxisSpacing: 6.0,
-                      maxCrossAxisExtent: 200,
-                    ),
-                    itemBuilder: (context, index) {
-                      if (_controller.searchList.isEmpty) {
-                        return buildCardItems(
-                            image: _controller.productList[index].image,
-                            price: _controller.productList[index].price,
-                            rate: _controller.productList[index].rating.rate,
-                            productId: _controller.productList[index].id,
-                            productModels: _controller.productList[index],
-                            onTap: () {
-                              Get.to(ProductDetailsScreen(
-                                productModels: _controller.productList[index],
-                              ));
-                            });
-                      } else {
-                        return buildCardItems(
-                            image: _controller.searchList[index].image,
-                            price: _controller.searchList[index].price,
-                            rate: _controller.searchList[index].rating.rate,
-                            productId: _controller.searchList[index].id,
-                            productModels: _controller.searchList[index],
-                            onTap: () {
-                              Get.to(ProductDetailsScreen(
-                                productModels: _controller.searchList[index],
-                              ));
-                            });
-                      }
-                    },
-                  ),
-          );
-        }
-      },
+        },
+      ),
     );
   }
 
