@@ -1,4 +1,5 @@
 import 'package:e_commerce_task1/logic/controllers/cart_controller.dart';
+import 'package:e_commerce_task1/logic/controllers/category_controller.dart';
 import 'package:e_commerce_task1/logic/controllers/product_controller.dart';
 import 'package:e_commerce_task1/models/product_models.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
@@ -8,44 +9,63 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CategoryItems extends StatelessWidget {
-  CategoryItems({Key? key}) : super(key: key);
+  final String categoryTitle;
+
+  CategoryItems({
+    Key? key,
+    required this.categoryTitle,
+  }) : super(key: key);
 
   final _cartController = Get.find<CartController>();
 
   final _controller = Get.find<ProductController>();
+
+  final _categoryController = Get.find<CategoryController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
-        title: const Text('Category Items'),
+        title: Text(categoryTitle),
         centerTitle: true,
         backgroundColor: Get.isDarkMode ? darkGreyClr : mainColor,
       ),
-      body: GridView.builder(
-        itemCount: _controller.productList.length,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio: 0.8,
-          mainAxisSpacing: 9.0,
-          crossAxisSpacing: 6.0,
-          maxCrossAxisExtent: 200,
-        ),
-        itemBuilder: (context, index) {
-          return buildCardItems(
-            image: _controller.productList[index].image,
-            price: _controller.productList[index].price,
-            rate: _controller.productList[index].rating.rate,
-            productId: _controller.productList[index].id,
-            productModels: _controller.productList[index],
-            onTap: () {
-              Get.to(
-                ProductDetailsScreen(
-                  productModels: _controller.productList[index],
-                ),
-              );
-            },
-          );
+      body: Obx(
+        () {
+          if (_categoryController.isAllCategoryLoading.value) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Get.isDarkMode ? pinkClr : mainColor,
+              ),
+            );
+          } else {
+            return GridView.builder(
+              itemCount: _categoryController.categoryList.length,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                childAspectRatio: 0.8,
+                mainAxisSpacing: 9.0,
+                crossAxisSpacing: 6.0,
+                maxCrossAxisExtent: 200,
+              ),
+              itemBuilder: (context, index) {
+                return buildCardItems(
+                  image: _categoryController.categoryList[index].image,
+                  price: _categoryController.categoryList[index].price,
+                  rate: _categoryController.categoryList[index].rating.rate,
+                  productId: _categoryController.categoryList[index].id,
+                  productModels: _categoryController.categoryList[index],
+                  onTap: () {
+                    Get.to(
+                      ProductDetailsScreen(
+                        productModels: _categoryController.categoryList[index],
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          }
         },
       ),
     );
