@@ -18,24 +18,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  late TextEditingController _emailTextController;
-  late TextEditingController _passwordTextController;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _emailTextController = TextEditingController();
-    _passwordTextController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    _emailTextController.dispose();
-    _passwordTextController.dispose();
-    super.dispose();
-  }
+  final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
 
   final controller = Get.find<AuthController>();
 
@@ -211,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child:
                                     Image.asset('assets/images/facebook.png'),
                                 onTap: () {
-                                  controller.facebookSignUpApp();
+                                  controller.faceBookSignUpApp();
                                 },
                               ),
                               const SizedBox(width: 10),
@@ -225,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     },
                                   );
                                 },
-                              )
+                              ),
                             ],
                           ),
                         ],

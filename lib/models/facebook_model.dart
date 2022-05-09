@@ -1,37 +1,31 @@
-class FacebookModel {
-  late String name;
-  late String email;
+class FaceBookModel {
+  final String? name;
+  final String? email;
+  final String? id;
+  final FaceBookPhotoModel? faceBookPhotoModel;
 
-  late String id;
-  late FacebookPhotoModel facebookPhotoModel;
+  FaceBookModel({this.name, this.email, this.id, this.faceBookPhotoModel});
 
-  FacebookModel({
-    required this.name,
-    required this.email,
-    required this.id,
-    required this.facebookPhotoModel,
-  });
-
-  FacebookModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    email = json['email'];
-
-    id = json['id'];
-    facebookPhotoModel = FacebookPhotoModel.fromJson(json['picture']['data']);
-  }
+  factory FaceBookModel.fromJson(Map<String, dynamic> json) => FaceBookModel(
+        email: json['email'],
+        name: json['name'],
+        id: json['id'],
+        faceBookPhotoModel:
+            FaceBookPhotoModel.fromJson(json['picture']['data']),
+      );
 }
 
-class FacebookPhotoModel {
-  late int height;
-  late String url;
-  late int width;
+class FaceBookPhotoModel {
+  final String? url;
+  final int? height;
+  final int? width;
 
-  FacebookPhotoModel(
-      {required this.height, required this.url, required this.width});
+  FaceBookPhotoModel({this.url, this.height, this.width});
 
-  FacebookPhotoModel.fromJson(Map<String, dynamic> json) {
-    height = json['height'];
-    url = json['url'];
-    width = json['width'];
-  }
+  factory FaceBookPhotoModel.fromJson(Map<String, dynamic> json) =>
+      FaceBookPhotoModel(
+        url: json['url'],
+        width: json['width'],
+        height: json['height'],
+      );
 }

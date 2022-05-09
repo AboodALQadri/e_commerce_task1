@@ -1,3 +1,4 @@
+
 import 'package:e_commerce_task1/models/facebook_model.dart';
 import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,15 +12,30 @@ class AuthController extends GetxController {
   bool isVisibility = false;
   bool isCheckBox = false;
 
-  var displayUserName = '';
-  var displayUserPhoto = '';
+  var displayUserName = ''.obs;
+  var displayUserPhoto = ''.obs;
+  var displayUserEmail = ''.obs;
 
   FirebaseAuth auth = FirebaseAuth.instance;
   var googleSignIn = GoogleSignIn();
-  late FacebookModel facebookModel;
+  FaceBookModel? facebookModel;
 
   var isSignedIn = false;
   final GetStorage authBox = GetStorage();
+
+  User? get userProfile => auth.currentUser;
+
+  @override
+  void onInit() {
+    displayUserName.value =
+        (userProfile != null ? userProfile!.displayName : '')!;
+
+    displayUserPhoto.value =
+        (userProfile != null ? userProfile!.photoURL : '')!;
+
+    displayUserEmail.value = (userProfile != null ? userProfile!.email : '')!;
+    super.onInit();
+  }
 
   void visibility() {
     isVisibility = !isVisibility;
@@ -42,16 +58,16 @@ class AuthController extends GetxController {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        displayUserName = name;
+        displayUserName.value = name;
         auth.currentUser!.updateDisplayName(name);
       });
 
       update();
 
-      Get.offNamed(Routes.loginScreen);
+      Get.offNamed(Routes.mainScreen);
       //
     } on FirebaseAuthException catch (error) {
-      String title = error.code.replaceAll('-', ' ').capitalize!;
+      String title = error.code.replaceAll(RegExp('-'), ' ').capitalize!;
       String message = '';
 
       if (error.code == 'weak-password') {
@@ -71,7 +87,7 @@ class AuthController extends GetxController {
       );
     } catch (error) {
       Get.snackbar(
-        'ERROR!',
+        'ERROR SignUp!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
@@ -80,12 +96,15 @@ class AuthController extends GetxController {
     }
   }
 
-  void logInUsingFirebase(
-      {required String email, required String password}) async {
+  void logInUsingFirebase({
+    required String email,
+    required String password,
+  }) async {
     try {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => displayUserName = auth.currentUser!.displayName!);
+          .then((value) =>
+              displayUserName.value = auth.currentUser!.displayName!);
 
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
@@ -95,7 +114,7 @@ class AuthController extends GetxController {
       Get.offNamed(Routes.mainScreen);
       //
     } on FirebaseAuthException catch (error) {
-      String title = error.code.replaceAll('-', ' ').capitalize!;
+      String title = error.code.replaceAll(RegExp('-'), ' ').capitalize!;
       String message = '';
       if (error.code == 'user-not-found') {
         message =
@@ -115,7 +134,7 @@ class AuthController extends GetxController {
       );
     } catch (error) {
       Get.snackbar(
-        'ERROR!',
+        'ERROR LogIn!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
@@ -124,7 +143,7 @@ class AuthController extends GetxController {
     }
   }
 
-  void resetPassword({required String email}) async {
+  void resetPassword(String email) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
 
@@ -140,7 +159,7 @@ class AuthController extends GetxController {
       );
       //
     } on FirebaseAuthException catch (error) {
-      String title = error.code.replaceAll('-', ' ').capitalize!;
+      String title = error.code.replaceAll(RegExp('-'), ' ').capitalize!;
       String message = '';
       if (error.code == 'user-not-found') {
         message =
@@ -160,7 +179,7 @@ class AuthController extends GetxController {
       );
     } catch (error) {
       Get.snackbar(
-        'ERROR!',
+        'ERROR Reset!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
@@ -172,19 +191,30 @@ class AuthController extends GetxController {
   void googleSignUpApp() async {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      displayUserName = googleUser!.displayName!;
-      displayUserPhoto = googleUser.photoUrl!;
+      displayUserName.value = googleUser!.displayName!;
+      displayUserPhoto.value = googleUser.photoUrl!;
+      displayUserEmail.value = googleUser.email;
+
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken,
+      );
+
+      await auth.signInWithCredential(credential);
 
       isSignedIn = true;
       authBox.write('auth', isSignedIn);
-
 
       update();
 
       Get.offNamed(Routes.mainScreen);
     } catch (error) {
+      // print('AuthController_TAG ->  ${error.toString()}');
       Get.snackbar(
-        'Error!',
+        'ErrorGoogle!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
@@ -193,17 +223,27 @@ class AuthController extends GetxController {
     }
   }
 
-  void facebookSignUpApp() async {
+  void faceBookSignUpApp() async {
     final LoginResult loginResult = await FacebookAuth.instance.login();
+    // final accesToken = loginResult.accessToken!.token;
+    // final credential = FacebookAuthProvider.credential(accesToken);
+    // await auth.signInWithCredential(credential);
 
     if (loginResult.status == LoginStatus.success) {
       final data = await FacebookAuth.instance.getUserData();
 
-      facebookModel = FacebookModel.fromJson(data);
+
+      facebookModel = FaceBookModel.fromJson(data);
+
+      //
+      // displayUserPhoto.value = facebookModel!.faceBookPhotoModel!.url!;
+      // displayUserEmail.value = facebookModel!.email!;
+      // displayUserName.value = facebookModel!.name!;
+
 
       isSignedIn = true;
-      authBox.write('auth', isSignedIn);
 
+      authBox.write("auth", isSignedIn);
 
       update();
 
@@ -215,20 +255,22 @@ class AuthController extends GetxController {
     try {
       await auth.signOut();
       await googleSignIn.signOut();
-      await FacebookAuth.i.logOut();
-      displayUserName = '';
-      displayUserPhoto = '';
+      // await FacebookAuth.instance.logOut();
+      displayUserName.value = '';
+      displayUserPhoto.value = '';
+      // displayUserEmail.value = '';
 
       isSignedIn = false;
       authBox.remove('auth');
-
 
       update();
 
       Get.offNamed(Routes.welcomeScreen);
     } catch (error) {
+      print('AuthController_TAG ->  ${error.toString()}');
+
       Get.snackbar(
-        'ERROR!',
+        'ERROR SignOut!',
         error.toString(),
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,

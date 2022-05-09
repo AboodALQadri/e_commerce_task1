@@ -98,7 +98,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                           if (formKey.currentState!.validate()) {
                             String email = _emailTextController.text.trim();
 
-                            controller.resetPassword(email: email);
+                            controller.resetPassword(email);
                           }
                         },
                       );

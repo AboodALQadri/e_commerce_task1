@@ -1,5 +1,7 @@
+import 'package:e_commerce_task1/language/localiztion.dart';
 import 'package:e_commerce_task1/logic/controllers/theme_controller.dart';
 import 'package:e_commerce_task1/routes/routes.dart';
+import 'package:e_commerce_task1/utils/my_string.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,6 +22,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: 'Uzay App',
+      locale: Locale(GetStorage().read<String>('lang').toString()),
+      translations: LocalizationApp(),
+      fallbackLocale: Locale(eng),
       debugShowCheckedModeBanner: false,
       theme: ThemesApp.light,
       darkTheme: ThemesApp.dark,
