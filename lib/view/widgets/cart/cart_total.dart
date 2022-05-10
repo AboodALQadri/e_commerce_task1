@@ -1,4 +1,5 @@
 import 'package:e_commerce_task1/logic/controllers/cart_controller.dart';
+import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,9 @@ class CartTotal extends StatelessWidget {
                       elevation: 0,
                       primary: Get.isDarkMode ? pinkClr : mainColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(Routes.paymentScreen);
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
