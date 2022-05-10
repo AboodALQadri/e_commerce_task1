@@ -1,5 +1,7 @@
+import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DeliveryContainerWidget extends StatefulWidget {
   const DeliveryContainerWidget({Key? key}) : super(key: key);
@@ -23,7 +25,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
           phone: '059-1234-567',
           address: 'Gaza , AL-Remal Street',
           value: 1,
-          color: changeColor ? Colors.white : Colors.grey.shade300,
+          color: changeColor ? Colors.white : Colors.grey.shade400,
           onChanged: (int? value) {
             setState(() {
               radioContainerIndex = value!;
@@ -40,7 +42,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
           phone: '056-707-4004',
           address: 'Gaza , AL-Remal Street',
           value: 2,
-          color: changeColor ? Colors.grey.shade300 : Colors.white,
+          color: changeColor ? Colors.grey.shade400 : Colors.white,
           onChanged: (int? value) {
             setState(() {
               radioContainerIndex = value!;
@@ -85,7 +87,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
             onChanged: (int? value) {
               onChanged(value);
             },
-            fillColor: MaterialStateColor.resolveWith((states) => Colors.red),
+            fillColor: MaterialStateColor.resolveWith((states) => Get.isDarkMode ? pinkClr : mainColor),
           ),
           const SizedBox(
             width: 10,

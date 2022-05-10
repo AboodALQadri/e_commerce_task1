@@ -1,5 +1,6 @@
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/payment/delivery_container_widget.dart';
+import 'package:e_commerce_task1/view/widgets/payment/payment_method_widget.dart';
 import 'package:e_commerce_task1/view/widgets/text_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,11 +48,45 @@ class PaymentScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              //PaymentMethodWidget(),
+              PaymentMethodWidget(),
               const SizedBox(
                 height: 20,
               ),
-              //Total Button
+              Center(
+                child: TextUtils(
+                  text: 'Total: \$200',
+                  color: Get.isDarkMode ? Colors.white : Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  underLine: TextDecoration.none,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 150,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
+                      primary: Get.isDarkMode ? pinkClr : mainColor,
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      'Pay Now',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
