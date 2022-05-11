@@ -32,14 +32,15 @@ class SettingsController extends GetxController {
       return;
     }
     if (typeLang == fra) {
-      languageLocale == fra;
+      languageLocale = fra;
       saveLanguage(fra);
     } else if (typeLang == arb) {
-      languageLocale == arb;
+      languageLocale = arb;
       saveLanguage(arb);
     } else {
       languageLocale = eng;
       saveLanguage(eng);
     }
+    update();
   }
 }
