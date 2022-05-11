@@ -1,3 +1,4 @@
+import 'package:e_commerce_task1/logic/controllers/auth_controller.dart';
 import 'package:e_commerce_task1/logic/controllers/payment_controller.dart';
 import 'package:e_commerce_task1/routes/routes.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
@@ -20,6 +21,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
   bool changeColor = false;
 
   final _controller = Get.find<PaymentController>();
+  final _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +49,9 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
           () {
             return buildRadioContainer(
               title: 'Delivery',
-              name: 'Abood AL-Qadri',
+              name: _authController.displayUserName.value,
               phone: _controller.phoneNumber.value,
-              address: 'Gaza , AL-Remal Street',
+              address: _controller.address.value,
               value: 2,
               icon: InkWell(
                 onTap: () {
@@ -82,7 +84,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
                         controller: _phoneController,
                         cursorColor: Colors.black,
                         maxLength: 9,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.number,
                         onSubmitted: (value) {
                           _phoneController.text = value;
                         },
@@ -141,6 +143,8 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
                   radioContainerIndex = value!;
                   changeColor = !changeColor;
                 });
+
+                _controller.updatePosition();
               },
             );
           },
@@ -216,10 +220,10 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
                 ),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       '🇵🇸+970 ',
                       style: TextStyle(
-                        color: Get.isDarkMode ? Colors.white : Colors.black,
+                        color: Colors.black,
                       ),
                     ),
                     TextUtils(
@@ -229,7 +233,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
                       fontSize: 15,
                       underLine: TextDecoration.none,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 120,
                     ),
                     SizedBox(

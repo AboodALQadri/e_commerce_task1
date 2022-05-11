@@ -8,6 +8,6 @@ class MainBinding implements Bindings {
   void dependencies() {
     Get.put(MainController());
     Get.put(SettingsController());
-    Get.put(PaymentController());
+    Get.put(PaymentController() , permanent: true);
   }
 }
