@@ -46,109 +46,107 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
           height: 10,
         ),
         Obx(
-          () {
-            return buildRadioContainer(
-              title: 'Delivery',
-              name: _authController.displayUserName.value,
-              phone: _controller.phoneNumber.value,
-              address: _controller.address.value,
-              value: 2,
-              icon: InkWell(
-                onTap: () {
-                  Get.defaultDialog(
-                    title: "Enter Your Phone Number",
-                    titleStyle: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    backgroundColor: Colors.white,
-                    radius: 10,
-                    //
-                    textCancel: " Cancel ",
-                    cancelTextColor: Colors.black,
-                    onCancel: () {
-                      Get.toNamed(Routes.paymentScreen);
-                    },
-                    //
-                    textConfirm: " Save ",
-                    confirmTextColor: Colors.black,
-                    onConfirm: () {
-                      Get.back();
-                      _controller.phoneNumber.value = _phoneController.text;
-                    },
-                    buttonColor: Get.isDarkMode ? pinkClr : mainColor,
-                    content: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: TextField(
-                        controller: _phoneController,
-                        cursorColor: Colors.black,
-                        maxLength: 9,
-                        keyboardType: TextInputType.number,
-                        onSubmitted: (value) {
-                          _phoneController.text = value;
-                        },
-                        decoration: InputDecoration(
-                          fillColor: Get.isDarkMode
-                              ? pinkClr.withOpacity(0.2)
-                              : mainColor.withOpacity(0.2),
-                          focusColor: Colors.red,
-                          prefixIcon: Icon(
-                            Icons.phone,
-                            color: Get.isDarkMode ? pinkClr : mainColor,
-                          ),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              _phoneController.clear();
-                            },
-                            icon: const Icon(Icons.close, color: Colors.black),
-                          ),
-                          hintText: "Enter Your Phone Number",
-                          hintStyle: const TextStyle(
-                            color: Colors.black45,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          filled: true,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+          () => buildRadioContainer(
+            title: 'Delivery',
+            name: _authController.displayUserName.value,
+            phone: _controller.phoneNumber.value,
+            address: _controller.address.value,
+            value: 2,
+            icon: InkWell(
+              onTap: () {
+                Get.defaultDialog(
+                  title: "Enter Your Phone Number",
+                  titleStyle: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  backgroundColor: Colors.white,
+                  radius: 10,
+                  //
+                  textCancel: " Cancel ",
+                  cancelTextColor: Colors.black,
+                  onCancel: () {
+                    Get.toNamed(Routes.paymentScreen);
+                  },
+                  //
+                  textConfirm: " Save ",
+                  confirmTextColor: Colors.black,
+                  onConfirm: () {
+                    Get.back();
+                    _controller.phoneNumber.value = _phoneController.text;
+                  },
+                  buttonColor: Get.isDarkMode ? pinkClr : mainColor,
+                  content: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      controller: _phoneController,
+                      cursorColor: Colors.black,
+                      maxLength: 9,
+                      keyboardType: TextInputType.number,
+                      onSubmitted: (value) {
+                        _phoneController.text = value;
+                      },
+                      decoration: InputDecoration(
+                        fillColor: Get.isDarkMode
+                            ? pinkClr.withOpacity(0.2)
+                            : mainColor.withOpacity(0.2),
+                        focusColor: Colors.red,
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: Get.isDarkMode ? pinkClr : mainColor,
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            _phoneController.clear();
+                          },
+                          icon: const Icon(Icons.close, color: Colors.black),
+                        ),
+                        hintText: "Enter Your Phone Number",
+                        hintStyle: const TextStyle(
+                          color: Colors.black45,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
-                  );
-                },
-                child: Icon(
-                  Icons.contact_phone,
-                  color: Get.isDarkMode ? pinkClr : mainColor,
-                  size: 20,
-                ),
-              ),
-              color: changeColor ? Colors.grey.shade400 : Colors.white,
-              onChanged: (int? value) {
-                setState(() {
-                  radioContainerIndex = value!;
-                  changeColor = !changeColor;
-                });
-
-                _controller.updatePosition();
+                  ),
+                );
               },
-            );
-          },
-        )
+              child: Icon(
+                Icons.contact_phone,
+                color: Get.isDarkMode ? pinkClr : mainColor,
+                size: 20,
+              ),
+            ),
+            color: changeColor ? Colors.grey.shade400 : Colors.white,
+            onChanged: (int? value) {
+              setState(() {
+                radioContainerIndex = value!;
+                changeColor = !changeColor;
+              });
+
+              _controller.updatePosition();
+            },
+          ),
+        ),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:e_commerce_task1/logic/controllers/cart_controller.dart';
 import 'package:e_commerce_task1/utils/theme.dart';
 import 'package:e_commerce_task1/view/widgets/payment/delivery_container_widget.dart';
 import 'package:e_commerce_task1/view/widgets/payment/payment_method_widget.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+   PaymentScreen({Key? key}) : super(key: key);
+
+  final _cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,7 @@ class PaymentScreen extends StatelessWidget {
               ),
               Center(
                 child: TextUtils(
-                  text: 'Total: \$200',
+                  text: 'Total: ${_cartController.total}\$',
                   color: Get.isDarkMode ? Colors.white : Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
